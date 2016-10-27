@@ -7,8 +7,8 @@
  **********************************/
 
 int push (int * stack, int pos, float ValNum){
-  int val = 0;
   stack[pos] = ValNum;
+  printf("satack %i\n", stack[pos]);
   return ValNum;
 }
 
@@ -29,6 +29,6 @@ void print (int * stack){
     if(stack[i] == -9999)
       printf("\n[   ]");
     else
-      printf("\n[ %d  ]",stack[i]);
+      printf("\n[ %d  ]\n",stack[i]);
   }
 }

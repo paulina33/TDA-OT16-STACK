@@ -12,7 +12,8 @@ extern int push(int *stack, int pos, float ValNum);
 extern int pop(int *stack, int pos);
 extern int peek(int *stack, int pos);
 extern void print(int *stack);
-void motor(int *stack, int pos, float val1, float val, char num[], int k, int *in);
+void motor(int *stack, int *pos, float val1, float val, char num[], int k, int *in);
+
 /***************************************************************
  *               esta es la funcion principal,                 *
  *               la lee un caracter y dependiendo              *
@@ -32,11 +33,13 @@ int main(void)
       scanf("%s", num);//leo el caracter
       ValNum= atof(num);//cambio el caracter a su valor en float
       k=num[0];//tomo el valor ascii de el caracter
-      if((k>=48) && (k<=57))//if1 valoro si lo que me ingresa es un numero
+     
+     if((k>=48) && (k<=57))//if1 valoro si lo que me ingresa es un numero
 	{
 	  pos++;
 	  push(stack, pos, ValNum);
 	  printf("\nSe ingreso el valor -> %.2f\n", ValNum);
+	  //printf("%i pos1 \n",pos);
 	}//cierro if 1
       else//else1 valoro que tipo de caracter es para saber que operacion se usa
 	{
@@ -45,23 +48,30 @@ int main(void)
 	      val= pop(stack, pos);
 	      pos--;
 	      val1=pop(stack, pos);
-	      pos--;
+	      // pos--;
 	      printf("\nSe saco el valor-> %.1f\n", val);
 	      printf("\nSe saco el valor2-> %.1f\n", val1);
-	      motor(stack,  pos,  val1, val, num, k, &in);
+	      motor(stack,  &pos,  val1, val, num, k, &in);
+	      //printf("%i pos1 \n",pos);
+	      //print(stack);
 	    }
-	  
-	}
+	  else 
+	    {	   
+	      //print(stack); 
+printf(" no hay suficientes valores para hacer una operacion\n");
+	    }	
+}
       if(pos>=tam)
 	{
 	in=1;   
 	printf("Favor de no ingresar mas de 10 valores seguidos.\n");
 	} 
+      //print(stack);
 }    
   return 0;
     
 }
-void motor(int *stack, int pos, float val1, float val, char num[], int k, int *in)
+void motor(int *stack, int *pos, float val1, float val, char num[], int k, int *in)
 {
   int j=0,l=0,m=0;
   float val2, suma=0;
@@ -69,32 +79,32 @@ switch(k){
  case 43:	
 	suma = val1+val;
 		printf("suma %.2f\n", suma);
-		pos++;
-		val2=push(stack, pos, suma);
+		*pos++;
+		val2=push(stack, *pos, suma);
 		printf("\nSe ingreso el valor -> %.2f\n", val2);
 		break;
 	     
 	      case 45:
 		suma = val1-val;
 		printf("Resta %.2f\n", suma);
-		pos++;
-		val2=push(stack, pos, suma);
+		*pos++;
+		val2=push(stack, *pos, suma);
 		printf("\nSe ingreso el valor -> %.2f\n", val2);
 		break;
 	     
 	      case 47:
 		suma = val1/val;
 		printf("Division %.2f\n", suma);
-		pos++;
-		val2=push(stack, pos, suma);
+		*pos++;
+		val2=push(stack, *pos, suma);
 		printf("\nSe ingreso el valor -> %.2f\n", val2);
 		break;
 
 	      case 120:
 		suma = val1*val;
 		printf("Multiplicacion %.2f\n", suma);
-		pos++;
-		val2=push(stack, pos, suma);
+		*pos++;
+		val2=push(stack, *pos, suma);
 		printf("\nSe ingreso el valor -> %.2f\n", val2);
 		break;
 		case 37:
@@ -102,8 +112,8 @@ switch(k){
 		  j=val;
 		m = l%j;
 		printf("Modulo %i\n", m);
-		pos++;
-		val2=push(stack, pos, m);
+		*pos++;
+		val2=push(stack, *pos, m);
 		printf("\nSe ingreso el valor -> %.2f\n", val2);
 		break;	
 	      default://si no es caracter val o numero se manda un mensaje de error
