@@ -27,16 +27,16 @@ int main(void)
   while (in == 0)
     {
       printf(">>> ");
-      scanf("%s", num);
-      ValNum= atof(num);
-      k=num[0];
-      if((k>=48) && (k<=57))//if 1
+      scanf("%s", num);//leo el caracter
+      ValNum= atof(num);//cambio el caracter a su valor en float
+      k=num[0];//tomo el valor ascii de el caracter
+      if((k>=48) && (k<=57))//if1 valoro si lo que me ingresa es un numero
 	{
 	  pos++;
 	  push(stack, pos, ValNum);
 	  printf("\nSe ingreso el valor -> %.2f\n", ValNum);
 	}//cierro if 1
-      else//else 1
+      else//else1 valoro que tipo de caracter es para saber que operacion se usa
 	{
 	  if(pos>0)
 	    {
@@ -88,9 +88,9 @@ int main(void)
 		val2=push(stack, pos, m);
 		printf("\nSe ingreso el valor -> %.2f\n", val2);
 		break;	
-	      default:
+	      default://si no es caracter val o numero se manda un mensaje de error
 		printf("ERROR la opcion no es valida.favor de ingresar un numero o un caracter.");
-		in=1;
+		in=1;// se cambia el valor de la variable a validar en el ciclo para salir de el programa. 
 		break;
 	      }
 	    }
