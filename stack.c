@@ -2,12 +2,10 @@
 #include <stdlib.h>
 
 
-int push (int * stack, int pos){
+int push (int * stack, int pos, float ValNum){
   int val = 0;
-  printf("Que valor desea ingresar?\n$ ");
-  scanf("%d",&val);
-  stack[pos] = val;
-  return val;
+  stack[pos] = ValNum;
+  return ValNum;
 }
 
 int pop (int * stack, int pos){

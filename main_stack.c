@@ -5,43 +5,94 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
-extern int push(int *stack, int pos);
+extern int push(int *stack, int pos, float ValNum);
 extern int pop(int *stack, int pos);
 extern int peek(int *stack, int pos);
 extern void print(int *stack);
 
-int main(void){
-  int stack[5], pos = -1, opt = -1, val = 0, in = 0;
-  printf("***BIENVENIDO AL STACK***\n");
-  while (in == 0){
-    printf("      ¿Que desea hacer?\n1) Insertar al Stack\n2) Sacar del Stack\n3) Ver el ultimo valor insertado\n4) Imprimir el Stack\n5) Salir\n$ ");
-    scanf("%d",&opt);
-    switch(opt){
-      case 1:
-        pos++;
-        val=push(stack, pos);
-        printf("\nSe ingreso el valor -> %d\n", val);
-        break;
-      case 2:
-        val=pop(stack, pos);
-        pos--;
-        printf("\nSe saco el valor-> %d\n", val);
-        break;
-      case 3:
-        val=peek(stack, pos);
-        printf("\nEl ultimo valor agregado es -> %d\n", val);
-        break;
-      case 4:
-        print(stack);
-        break;
-      case 5:
-        in=1;
-        break;
-      default:
-        printf("\nERROR... opcion invalida, vuelva a intentar...\n");
-        break;
-    }
-  }
-        return 0;
+int main(void)
+{
+  int stack[10], pos = -1, opt = -1, in = 0, k=0, j=0,l=0,m=0;
+  char num[5];
+  float  ValNum=0, val = 0, val1=0, suma=0, val2=0;
+  
+  
+  while (in == 0)
+    {
+      printf(">>> ");
+      scanf("%s", num);
+      ValNum= atof(num);
+      k=num[0];
+      if((k>=48) && (k<=57))//if 1
+	{
+	  pos++;
+	  push(stack, pos, ValNum);
+	  printf("\nSe ingreso el valor -> %.2f\n", ValNum);
+	}//cierro if 1
+      else//else 1
+	{
+	  if(pos>0)
+	    {
+	      val= pop(stack, pos);
+	      pos--;
+	      val1=pop(stack, pos);
+	      pos--;
+	      printf("\nSe saco el valor-> %.1f\n", val);
+	      printf("\nSe saco el valor2-> %.1f\n", val1);
+	      switch(k){
+	     
+	      case 43:
+		suma = val1+val;
+		printf("suma %.2f\n", suma);
+		pos++;
+		val2=push(stack, pos, suma);
+		printf("\nSe ingreso el valor -> %.2f\n", val2);
+		break;
+	     
+	      case 45:
+		suma = val1-val;
+		printf("Resta %.2f\n", suma);
+		pos++;
+		val2=push(stack, pos, suma);
+		printf("\nSe ingreso el valor -> %.2f\n", val2);
+		break;
+	     
+	      case 47:
+		suma = val1/val;
+		printf("Division %.2f\n", suma);
+		pos++;
+		val2=push(stack, pos, suma);
+		printf("\nSe ingreso el valor -> %.2f\n", val2);
+		break;
+
+	      case 120:
+		suma = val1*val;
+		printf("Multiplicacion %.2f\n", suma);
+		pos++;
+		val2=push(stack, pos, suma);
+		printf("\nSe ingreso el valor -> %.2f\n", val2);
+		break;
+		case 37:
+		  l=val1;
+		  j=val;
+		m = l%j;
+		printf("Modulo %i\n", m);
+		pos++;
+		val2=push(stack, pos, m);
+		printf("\nSe ingreso el valor -> %.2f\n", val2);
+		break;	
+	      default:
+		printf("ERROR la opcion no es valida.favor de ingresar un numero o un caracter.");
+		in=1;
+		break;
+	      }
+	    }
+	  
+	}
+    }    
+  return 0;
+    
 }
