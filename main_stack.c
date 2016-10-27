@@ -12,6 +12,7 @@ extern int push(int *stack, int pos, float ValNum);
 extern int pop(int *stack, int pos);
 extern int peek(int *stack, int pos);
 extern void print(int *stack);
+void motor(int *stack, int pos, float val1, float val, char num[], int k, int *in);
 /***************************************************************
  *               esta es la funcion principal,                 *
  *               la lee un caracter y dependiendo              *
@@ -20,9 +21,9 @@ extern void print(int *stack);
  ***************************************************************/
 int main(void)
 {
-  int stack[tam], pos = -1, opt = -1, in = 0, k=0, j=0,l=0,m=0;
+  int stack[tam], pos = -1, in = 0, k=0;
   char num[5];
-  float  ValNum=0, val = 0, val1=0, suma=0, val2=0;
+  float  ValNum=0, val = 0, val1=0;
   
   printf("Bienvenido a la calculadora favor de inicializar con el numero que quiere calcular. Una vez introducidos los dos o mas numeros a utilizar, ingrese un caractrer permitido \n 1)mas \n 2)-\n 3)porcentaje\n 4)x\n 5)/\n");
   while (in == 0)
@@ -47,10 +48,26 @@ int main(void)
 	      pos--;
 	      printf("\nSe saco el valor-> %.1f\n", val);
 	      printf("\nSe saco el valor2-> %.1f\n", val1);
-	      switch(k){
-	     
-	      case 43:
-		suma = val1+val;
+	      motor(stack,  pos,  val1, val, num, k, &in);
+	    }
+	  
+	}
+      if(pos>=tam)
+	{
+	in=1;   
+	printf("Favor de no ingresar mas de 10 valores seguidos.\n");
+	} 
+}    
+  return 0;
+    
+}
+void motor(int *stack, int pos, float val1, float val, char num[], int k, int *in)
+{
+  int j=0,l=0,m=0;
+  float val2, suma=0;
+switch(k){
+ case 43:	
+	suma = val1+val;
 		printf("suma %.2f\n", suma);
 		pos++;
 		val2=push(stack, pos, suma);
@@ -91,18 +108,7 @@ int main(void)
 		break;	
 	      default://si no es caracter val o numero se manda un mensaje de error
 		printf("ERROR la opcion no es valida.favor de ingresar un numero o un caracter.");
-		in=1;// se cambia el valor de la variable a validar en el ciclo para salir de el programa. 
+		*in=1;// se cambia el valor de la variable a validar en el ciclo para salir de el programa. 
 		break;
-	      }
-	    }
-	  
-	}
-      if(pos>=tam)
-	{
-	in=1;   
-	printf("Favor de no ingresar mas de 10 valores seguidos.\n");
-	} 
-}    
-  return 0;
-    
+		}
 }
