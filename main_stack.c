@@ -1,7 +1,6 @@
 /*
 @date Octubre 2016
-@author Carlos Almeraz, Edgar Ortiz
-
+@author Carlos Almeraz, Edgar Ortiz, Ana Paulina Salazar
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,7 +11,12 @@ extern int push(int *stack, int pos, float ValNum);
 extern int pop(int *stack, int pos);
 extern int peek(int *stack, int pos);
 extern void print(int *stack);
-
+/***************************************************************
+ *               esta es la funcion principal,                 *
+ *               la lee un caracter y dependiendo              *
+ *               de su tipo y valor llama a las funciones      *
+ *               y realiza la operacion necesaria.             *
+ ***************************************************************/
 int main(void)
 {
   int stack[10], pos = -1, opt = -1, in = 0, k=0, j=0,l=0,m=0;

@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+/*************************************
+ *  Esta funciones agregan al estack *
+ *  retiran de el stack              *
+ *   eliminan elementos del stack    *
+ **********************************/
 
 int push (int * stack, int pos, float ValNum){
   int val = 0;
