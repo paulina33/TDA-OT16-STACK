@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#define tam 10
 
 extern int push(int *stack, int pos, float ValNum);
 extern int pop(int *stack, int pos);
@@ -19,11 +20,11 @@ extern void print(int *stack);
  ***************************************************************/
 int main(void)
 {
-  int stack[10], pos = -1, opt = -1, in = 0, k=0, j=0,l=0,m=0;
+  int stack[tam], pos = -1, opt = -1, in = 0, k=0, j=0,l=0,m=0;
   char num[5];
   float  ValNum=0, val = 0, val1=0, suma=0, val2=0;
   
-  
+  printf("Bienvenido a la calculadora favor de inicializar con el numero que quiere calcular. Una vez introducidos los dos o mas numeros a utilizar, ingrese un caractrer permitido \n 1)mas \n 2)-\n 3)porcentaje\n 4)x\n 5)/\n");
   while (in == 0)
     {
       printf(">>> ");
@@ -96,7 +97,12 @@ int main(void)
 	    }
 	  
 	}
-    }    
+      if(pos>=tam)
+	{
+	in=1;   
+	printf("Favor de no ingresar mas de 10 valores seguidos.\n");
+	} 
+}    
   return 0;
     
 }
